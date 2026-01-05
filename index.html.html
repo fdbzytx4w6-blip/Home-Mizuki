@@ -1,0 +1,268 @@
+<!DOCTYPE html> 
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Home - Mizuki</title>
+    <link rel="icon" href="https://i.postimg.cc/jdQPjqkn/M-04-01-2026.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      /* Reset */
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: #e6e6e6;
+        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        font-weight: 500;
+      }
+
+      /* 2017-style top header bar */
+      .top-header {
+        width: 100%;
+        height: 40px; /* close to Roblox 2017 header height */
+        background-color: #653e35;
+        display: flex;
+        align-items: center;
+      }
+
+      .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 8px; /* reduced left gap */
+        margin-right: 6px; /* tighter spacing to icon */
+        cursor: pointer;
+      }
+
+      .hamburger span {
+        width: 14px;
+        height: 2px;
+        background: white;
+        margin: 2px 0;
+        border-radius: 1px; /* sharp but slightly edged */
+      }
+
+      .header-icon {
+        height: 28px;
+        margin-right: 12px; /* balanced spacing before Games */
+      }
+
+      .right-links {
+        margin-left: auto; /* pushes to the far right */
+        margin-right: 16px;
+      }
+
+      .right-links span {
+        color: white;
+        font-size: 18px;
+        font-weight: 500;
+        margin-left: 12px;
+        cursor: pointer;
+        padding: 4px 6px;
+        border-radius: 2px;
+      }
+
+      .right-links span:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .right-links span:active {
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+      .nav-links {
+        margin-left: 20px;
+      }
+
+      .nav-links span {
+        color: white;
+        font-size: 18px;
+        font-weight: 500;
+        margin-right: 18px;
+        cursor: pointer;
+        padding: 4px 6px; /* allows hover background without affecting layout */
+        border-radius: 2px; /* sharp edges */
+      }
+
+      .nav-links span:hover {
+        background: rgba(255, 255, 255, 0.15); /* light grey/white opacity hover */
+      }
+
+      .nav-links span:active {
+        background: rgba(255, 255, 255, 0.25); /* slightly stronger when clicked */
+      }
+
+      .search-wrap {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .nav-search {
+        height: 36px; /* bigger input */
+        width: 320px; /* longer search bar */
+        background: #ffffff;
+        border: 1px solid #bfbfbf;
+        border-radius: 2px; /* sharp but cornered edges */
+        padding: 0 36px 0 12px; /* room for icon on the right */
+        font-size: 15px; /* text unchanged */
+        outline: none;
+        vertical-align: middle;
+        margin-top: -4px; /* vertically centered */
+      }
+
+      .search-icon {
+        position: absolute;
+        right: 8px;
+        height: 20px; /* larger, clearly visible icon */
+        pointer-events: none; /* clicking still focuses input */
+        opacity: 0.9;
+      }
+
+      .nav-search::placeholder {
+        color: #9a9a9a; /* grey but not too grey */
+      }
+
+      .nav-search {
+        height: 28px; /* noticeably taller */
+        width: 220px; /* longer like real 2017 Roblox */
+        background: #ffffff;
+        border: 1px solid #bfbfbf;
+        border-radius: 2px; /* sharp but cornered edges */
+        padding: 0 8px;
+        font-size: 14px; /* scaled text */
+        outline: none;
+        vertical-align: middle;
+      }
+
+      .nav-search::placeholder {
+        color: #9a9a9a; /* grey but not too grey */
+      }
+
+      .nav-search {
+        height: 24px; /* scaled slightly up */
+        width: 190px; /* slightly longer for accuracy */
+        background: #ffffff;
+        border: 1px solid #bfbfbf;
+        border-radius: 2px; /* sharp but cornered edges */
+        padding: 0 7px;
+        font-size: 13px;
+        outline: none;
+        vertical-align: middle;
+      }
+
+      .nav-search::placeholder {
+        color: #9a9a9a; /* grey but not too grey */
+      }
+
+      .nav-search {
+        height: 22px;
+        width: 160px;
+        background: #ffffff;
+        border: 1px solid #bfbfbf;
+        border-radius: 2px; /* sharp but cornered edges */
+        padding: 0 6px;
+        font-size: 12px;
+        outline: none;
+        vertical-align: middle;
+      }
+
+      .nav-search::placeholder {
+        color: #9a9a9a; /* grey but not too grey */
+      }
+
+      .chat-bar {
+        position: fixed;
+        bottom: 0;
+        right: 120px; /* right side with a large gap from the edge */
+        width: 220px; /* short bar */
+        height: 36px;
+        background-color: #653e35; /* same as header */
+        display: flex;
+        align-items: center;
+        padding-left: 12px;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        cursor: pointer;
+        z-index: 1001;
+      }
+
+      .chat-bar span {
+        color: white;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .chat-popup {
+        position: fixed;
+        bottom: 0;
+        right: 120px;
+        width: 220px;
+        height: 220px; /* high but not too high */
+        background: #f2f2f2; /* white but a lil darker */
+        border: 1px solid #cfcfcf;
+        border-bottom: none;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+
+      .chat-popup img {
+        width: 48px;
+        height: 48px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Plain header bar (intentionally empty) -->
+    <div class="top-header">
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <img
+        class="header-icon"
+        src="https://i.postimg.cc/7LYNHZYN/M-04-01-2026.png"
+        alt="Logo"
+      />
+      <div class="nav-links">
+        <span>Games</span>
+        <span>Catalog</span>
+        <span>Create</span>
+        <span>Download</span>
+        <div class="search-wrap">
+          <input class="nav-search" type="text" placeholder="Search" />
+          <img
+            class="search-icon"
+            src="https://i.postimg.cc/brWkyNP8/Screenshot-2026-01-05-151653-removebg-preview.png"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="right-links">
+        <span>Login</span>
+        <span>Sign Up</span>
+      </div>
+    </div>
+
+    <!-- Bottom chat bar -->
+    <div class="chat-bar">
+      <span>Chat</span>
+    </div>
+    <div class="chat-popup" id="chatPopup"></div>
+
+    <script>
+      const chatBar = document.querySelector('.chat-bar');
+      const chatPopup = document.getElementById('chatPopup');
+      chatBar.addEventListener('click', () => {
+        chatPopup.style.display = chatPopup.style.display === 'block' ? 'none' : 'block';
+      });
+    </script>
+  </body>
+</html>
